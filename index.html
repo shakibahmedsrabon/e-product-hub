@@ -1,52 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>E Product Hub BD</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="tinder">
-  <div class="tinder--status">
-    <i class="fa fa-remove"></i>
-    <i class="fa fa-heart"></i>
-  </div>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script
+      type="module"
+      src="https://hammerjs.github.io/dist/hammer.min.js"
+    ></script>
+  </head>
+  <body class="bg-gray-100 min-h-screen font-sans">
+    <div class="container mx-auto px-4 py-8">
+      <header class="text-center mb-8">
+        <h1 class="text-4xl font-bold text-gray-800 mb-2">Cat-inder</h1>
+        <p class="text-gray-600">
+          Swipe right if you love the cats!
+          <i class="fas fa-paw ml-1 text-pink-400"></i>
+        </p>
+      </header>
 
-  <div class="tinder--cards">
-    <div class="tinder--card">
-      <img src="https://placeimg.com/600/300/people">
-      <h3>Demo card 1</h3>
-      <p>This is a demo for Tinder like swipe cards</p>
-    </div>
-    <div class="tinder--card">
-      <img src="https://placeimg.com/600/300/animals">
-      <h3>Demo card 2</h3>
-      <p>This is a demo for Tinder like swipe cards</p>
-    </div>
-    <div class="tinder--card">
-      <img src="https://placeimg.com/600/300/nature">
-      <h3>Demo card 3</h3>
-      <p>This is a demo for Tinder like swipe cards</p>
-    </div>
-    <div class="tinder--card">
-      <img src="https://placeimg.com/600/300/tech">
-      <h3>Demo card 4</h3>
-      <p>This is a demo for Tinder like swipe cards</p>
-    </div>
-    <div class="tinder--card">
-      <img src="https://placeimg.com/600/300/arch">
-      <h3>Demo card 5</h3>
-      <p>This is a demo for Tinder like swipe cards</p>
-    </div>
-  </div>
+      <div class="counter hidden">
+        <span class="liked-count text-green-500">0</span> /
+        <span class="disliked-count text-red-500">0</span>
+      </div>
 
-  <div class="tinder--buttons">
-    <button id="nope"><i class="fa fa-remove"></i></button>
-    <button id="love"><i class="fa fa-heart"></i></button>
-  </div>
-</div>
+      <div class="card-container">
+        <div class="empty-state hidden">
+          <i class="fas fa-cat cat-icon"></i>
+          <h3 class="text-xl font-semibold mb-2">No more adorable cats!</h3>
+          <p class="text-gray-600 mb-4">
+            You've swiped through all our lovely cats.
+          </p>
+          <button
+            class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-6 rounded-full transition"
+          >
+            Find more
+          </button>
+        </div>
 
-<script src="app.js"></script>
-</body>
+        <div class="cat-paw paw-left">
+          <i class="fas fa-paw"></i>
+        </div>
+
+        <div class="cat-paw paw-right">
+          <i class="fas fa-paw"></i>
+        </div>
+
+        <!-- Cards will be inserted here by JavaScript -->
+      </div>
+
+      <div class="action-buttons">
+        <div class="dislike-btn" id="dislike-btn">
+          <i class="fas fa-times"></i>
+        </div>
+        <div class="like-btn" id="like-btn">
+          <i class="fas fa-heart"></i>
+        </div>
+      </div>
+
+      <div class="mt-12 text-center text-gray-500">
+        <p>
+          Made with <i class="fas fa-heart text-red-400"></i> for cat lovers
+        </p>
+      </div>
+    </div>
+    <script src="app.js"></script>
+  </body>
 </html>
