@@ -4,6 +4,16 @@
 	--radius: 8px;
 }
 
+@font-face {
+	font-family: Praise;
+	src: url('./fonts/Praise-Regular.ttf');
+}
+
+@font-face {
+	font-family: Afacad;
+	src: url('./fonts/Afacad-Regular.ttf');
+}
+
 body, main, header, section, div, span, h1, h2, button {
 	margin: 0;
 	padding: 0;
@@ -17,6 +27,7 @@ body, main, header, section, div, span, h1, h2, button {
 
 body {
 	margin: 4rem;
+	font-family: Afacad;
 	background: var(--back);
 }
 
@@ -37,15 +48,23 @@ header {
 }
 
 .overview {
-	margin-top: 2rem;
+	margin-top: 7rem;
 	text-align: center;
 }
 
 .overview h1,
 .overview h2 {
-	font-size: 3rem;
+	font-size: 4rem;
+	font-family: Afacad;
 }
 
 .overview h1 {
+	font-family: Praise;
+	line-height: 1rem;
+	font-weight: 400;
+}
+
+.text {
+	font-family: Afacad;
 	line-height: 1rem;
 }
