@@ -1,168 +1,51 @@
-.card {
-	width: 90%;
-	max-width: 400px;
-	height: 500px;
-	position: absolute;
-	will-change: transform;
-	transition: all 0.3s ease-out;
-	cursor: grab;
-	user-select: none;
-	touch-action: none;
-	border-radius: 20px;
-	box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
-	background-size: cover;
-	background-position: center;
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-end;
-	overflow: hidden;
+:root {
+	--back: #FAFAFA;
+	--line: #BDBDBD;
+	--radius: 8px;
 }
 
-.card-content {
-	background: linear-gradient(
-		to top,
-		rgba(0, 0, 0, 0.8) 0%,
-		rgba(0, 0, 0, 0) 100%
-	);
-	color: white;
-	padding: 30px;
-	border-radius: 0 0 20px 20px;
+body, main, header, section, div, span, h1, h2, button {
+	margin: 0;
+	padding: 0;
+	border: none;
+	outline: none;
+	line-height: inherit;
+	text-decoration: none;
+	box-sizing: border-box;
+	font-size: inherit;
 }
 
-.card-1 {
-	z-index: 3;
-	transform: translateY(0) rotate(0deg);
+body {
+	margin: 4rem;
+	background: var(--back);
 }
 
-.card-2 {
-	z-index: 2;
-	transform: translateY(10px) rotate(2deg);
-}
-
-.card-3 {
-	z-index: 1;
-	transform: translateY(20px) rotate(-2deg);
-}
-
-.card-container {
-	position: relative;
+main {
 	width: 100%;
-	height: 600px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin-top: 20px;
-}
-
-.action-buttons {
-	display: flex;
-	justify-content: center;
-	gap: 16px;
-	margin-top: 30px;
-}
-
-.action-btn {
-	width: 70px;
-	height: 70px;
-	border-radius: 50%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	font-size: 30px;
-	cursor: pointer;
-	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-	transition: all 0.2s;
-}
-
-.action-btn:hover {
-	transform: scale(1.1);
-}
-
-.dislike-btn {
-	background-color: white;
-	color: #ff4757;
-	
-	cursor: pointer;
-	padding: 8px;
-	width: 48px;
-	height: 48px;
-	border-radius: 100%;
-	display: grid;
-	place-items: center;
-}
-
-.like-btn {
-	background-color: white;
-	color: #1dd1a1;
-	
-	cursor: pointer;
-	padding: 8px;
-	width: 48px;
-	height: 48px;
-	border-radius: 100%;
-	display: grid;
-	place-items: center;
-}
-
-.swipe-left {
-	transform: translateX(-200px) rotate(-30deg) !important;
-	opacity: 0;
-}
-
-.swipe-right {
-	transform: translateX(200px) rotate(30deg) !important;
-	opacity: 0;
-}
-
-.cat-paw {
-	position: absolute;
-	opacity: 0;
-	font-size: 100px;
-	z-index: 10;
-	transition: all 0.5s;
-}
-
-.paw-left {
-	left: 20%;
-	top: 30%;
-	color: #ff4757;
-}
-
-.paw-right {
-	right: 20%;
-	top: 30%;
-	color: #1dd1a1;
-}
-
-.show-paw {
-	opacity: 0.7;
-	transform: scale(1.2);
-}
-
-.counter {
-	position: absolute;
-	top: 20px;
-	right: 20px;
-	background-color: rgba(255, 255, 255, 0.8);
-	padding: 10px 15px;
-	border-radius: 20px;
-	font-weight: bold;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-	z-index: 100;
-}
-
-.empty-state {
-	text-align: center;
-	padding: 40px;
-	background-color: white;
-	border-radius: 20px;
-	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-	max-width: 400px;
+	height: 86vh;
 	margin: 0 auto;
+	max-width: 1800px;
+	max-height: 1000px;
+	border-radius: var(--radius);
+	border: solid 1px var(--line);
 }
 
-.cat-icon {
-	font-size: 60px;
-	margin-bottom: 20px;
-	color: #ff9ff3;
+header {
+	padding: 1rem;
+	font-size: 1rem;
+	border-bottom: solid 1px var(--line);
+}
+
+.overview {
+	margin-top: 2rem;
+	text-align: center;
+}
+
+.overview h1,
+.overview h2 {
+	font-size: 3rem;
+}
+
+.overview h1 {
+	line-height: 1rem;
 }
