@@ -1,7 +1,9 @@
 :root {
+	--radius: 8px;
 	--back: #FAFAFA;
 	--line: #BDBDBD;
-	--radius: 8px;
+	--black: #323232;
+	--gray: #F2F2F2;
 }
 
 @font-face {
@@ -36,6 +38,7 @@ main {
 	height: 86vh;
 	margin: 0 auto;
 	max-width: 1800px;
+	position: relative;
 	max-height: 1000px;
 	border-radius: var(--radius);
 	border: solid 1px var(--line);
@@ -67,4 +70,64 @@ header {
 .text {
 	font-family: Afacad;
 	line-height: 1rem;
+}
+
+.chat-button-container {
+	gap: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    width: 100%;
+    display: flex;
+    cursor: pointer;
+    position: absolute;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+button {
+	width: 3rem;
+	height: 3rem;
+	display: flex;
+	cursor: pointer;
+	border-radius: 50%;
+	align-items: center;
+	justify-content: center;
+	background: var(--gray);
+}
+
+button:hover {
+	border: solid 1px var(--line);
+}
+
+button svg path {
+	fill: var(--black);
+}
+
+.chat-thread {
+	height: 2.5rem;
+	border-radius: 4px;
+	color: var(--black);
+	padding: .5rem 1rem;
+	background: var(--gray);
+	position: relative;
+	/* transform: scale(.4);
+	transform-origin: right;
+	opacity: 0;
+	transition: .2s ease-in-out; */
+}
+
+/* .chat-thread:hover {
+	opacity: 1;
+	transform: scale(1);
+} */
+
+.chat-thread::after {
+	top: 0;
+	content: '';
+	width: 2rem;
+	height: 2.5rem;
+	position: absolute;
+	background: url('./images/arrow.svg') no-repeat;
+	background-size: 1.5rem;
+	background-position: center;
 }
