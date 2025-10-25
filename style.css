@@ -535,6 +535,20 @@ button svg path {
   background: none;
   padding-left: 1rem;
 }
+.chat-activity textarea {
+    width: 100%;
+    height: 1.4rem;
+    font-size: 1rem !important;
+    outline: none;
+    background: none;
+    padding: .7rem;
+    padding-left: 1rem;
+    font-family: 'Afacad';
+}
+
+.chat-activity textarea::-webkit-scrollbar {
+  display: none;
+}
 
 .chat-activity .icon {
   width: 4rem;
