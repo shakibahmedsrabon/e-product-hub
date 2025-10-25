@@ -213,7 +213,7 @@ button svg path {
   margin-left: 1rem;
 }
 
-.text-message.hide {
+.text-message {
   transform: scale(.2) translateX(-1rem);    /* initial smaller size */
   transform-origin: center left;
   opacity: 0;
@@ -222,7 +222,7 @@ button svg path {
 }
 
 
-.text-message.hide:hover {
+.text-message.show {
   transform: scale(1) translateX(0); /* combine scale with other transforms if needed */
   transform-origin: center left;
   opacity: 1;
