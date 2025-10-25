@@ -206,6 +206,7 @@ button svg path {
 }
 
 .message .text-message {
+  z-index: 111;
   padding: .5rem 1rem;
   background: var(--gray);
   border-radius: 4px;
@@ -262,6 +263,7 @@ button svg path {
 .message .text-message::before {
   content: '';
   top: .4rem;
+  z-index: 1;
   left: -1rem;
   width: 1.5rem;
   height: 1.5rem;

@@ -6,7 +6,7 @@ let chatBtn = document.querySelector(".chat-button");
 
 let textInput = document.getElementById("prompt");
 
-textInput.addEventListener("keyup", function(e){
+ textInput.addEventListener("keyup", async function(e){
     let text = e.target.value;
     if(text.length < 2){
         sendBtn.classList.remove("active")
