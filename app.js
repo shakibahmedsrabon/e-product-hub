@@ -19,6 +19,7 @@ let textInput = document.getElementById("prompt");
         setTimeout(function(){
             let reply = aiMessageUI(msg)
             setTimeout(function(){
+                reply[0].textContent = '';
                 reply[0].textContent = 'Replying: '+text;
                 ReceiveSound()
                 reply[0].classList.remove('waiting');
