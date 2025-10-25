@@ -525,7 +525,8 @@ button svg path {
   border: solid 1px var(--line);
 }
 
-.chat-activity input {
+.chat-activity input,
+.chat-activity textarea {
   width: 100%;
   height: 100%;
   border: none;
