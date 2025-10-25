@@ -193,6 +193,8 @@ button svg path {
   width: fit-content;
   margin: 1rem 0;
   align-items: flex-start;
+  justify-content: flex-start;
+  max-width: 95%;
 }
 
 .message .icon {
