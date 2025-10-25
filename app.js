@@ -1,9 +1,6 @@
 let msg = document.querySelector(".message-body");
 let sendBtn = document.querySelector(".send");
 
-for(let i = 0; i < 100; i++){
-    msg.innerHTML += "<button> Hello,"+ i+"</button>";
-}
 
 let textInput = document.getElementById("prompt");
 
@@ -16,6 +13,23 @@ textInput.addEventListener("keyup", function(e){
         sendBtn.classList.add("active")
     }
     if(e.key === "Enter" || e.keyCode === 13){
-        console.log("Text Intered:", e.target.value)
+        console.log("Text Interned:", e.target.value)
     }
 })
+
+function MessageUI(text = '', type = false){
+    let stricture = `
+        ${type ? 'Sender' : "Resider"}, ${text}</br>
+    `;
+    return stricture;
+}
+
+function CheckURL() {
+  const hash = window.location.hash.slice(1);
+  const value = hash.replace(/^ai=/, '');
+  console.log(decodeURIComponent(value));
+}
+
+CheckURL()
+
+window.addEventListener('popstate', CheckURL)

@@ -16,24 +16,27 @@
   src: url("./fonts/Afacad-Regular.ttf");
 }
 
-::-webkit-scrollbar-track
-{
-	display: none;
+::-webkit-scrollbar-track {
+  display: none;
 }
 
-::-webkit-scrollbar
-{
-	width: 10px;
+::-webkit-scrollbar {
+  width: 10px;
   background: transparent;
 }
 
-::-webkit-scrollbar-thumb
-{
-	background-color: var(--line);
+::-webkit-scrollbar-thumb {
+  background-color: var(--line);
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background-color: var(--black);
+}
+
+.Flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 body,
@@ -76,9 +79,31 @@ main {
 }
 
 header {
-  padding: 1rem;
+  z-index: 11;
+  height: 3.4rem;
+  padding: 0 1rem;
   font-size: 1rem;
+  overflow: hidden;
+  position: relative;
   border-bottom: solid 1px var(--line);
+}
+
+.back {
+  right: 0;
+  width: 60px;
+  height: 100%;
+  border: none;
+  border-radius: 0;
+  background: none;
+  position: absolute;
+  border-left: solid 1px var(--line);
+}
+
+.back:hover {
+  border: none;
+  border-left: solid 1px var(--line);
+  border-top-right-radius: 8px;
+  background: var(--gray);
 }
 
 .overview {
@@ -144,6 +169,12 @@ button svg path {
   padding: 0.5rem 1rem;
   background: var(--gray);
   position: relative;
+  cursor: text;
+  pointer-events: auto;
+}
+
+.chat-button {
+  pointer-events: auto;
 }
 
 .chat-thread::after {
@@ -155,6 +186,87 @@ button svg path {
   background: url("./images/arrow.svg") no-repeat;
   background-size: 1.5rem;
   background-position: center;
+}
+
+/* Message chat UI */
+.message {
+  width: fit-content;
+  margin: 1rem 0;
+  align-items: flex-start;
+}
+
+.message .icon {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.message .text-message {
+  padding: .5rem 1rem;
+  background: var(--gray);
+  border-radius: 4px;
+  position: relative;
+  margin-left: 1rem;
+}
+
+.text-message.hide {
+  transform: scale(.2) translateX(-1rem);    /* initial smaller size */
+  transform-origin: center left;
+  opacity: 0;
+  filter: blur(3px);
+  transition: .3s ease;
+}
+
+
+.text-message.hide:hover {
+  transform: scale(1) translateX(0); /* combine scale with other transforms if needed */
+  transform-origin: center left;
+  opacity: 1;
+  filter: blur(0px);
+  transition: .3s ease;   /* smooth animation */
+}
+
+.message.temp {
+  align-items: center;
+}
+
+.waiting {
+  background: linear-gradient(
+    115deg,
+    black 0%,
+    #3333338a 40%,
+    #ffffff00 50%,
+    #333333ad 60%,
+    black 100%
+  );
+  background-size: 200px;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 3.5s infinite linear;
+  text-align: center;
+}
+
+@keyframes shine {
+  0% {
+    background-position: -200px;
+  }
+  100% {
+    background-position: 200px;
+  }
+}
+
+.message .text-message::before {
+  content: '';
+  top: .4rem;
+  left: -1rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  position: absolute;
+  background: url("./images/message-arrow.svg") no-repeat;
+  background-size: 1rem;
+  background-position: right center;
 }
 
 .slider-container {
@@ -175,7 +287,6 @@ button svg path {
   border-radius: 24px;
   border: solid 1px var(--line);
 }
-
 
 .slider .cover {
   width: 100%;
@@ -215,7 +326,6 @@ button svg path {
   -webkit-user-drag: none;
 }
 
-
 .embla {
   /* mobile-first */
   --slide-height: 19rem;
@@ -225,14 +335,17 @@ button svg path {
 
 /* Tablets */
 @media (min-width: 640px) {
-  .embla { --slide-size: 60%; }
+  .embla {
+    --slide-size: 60%;
+  }
 }
 
 /* Desktop */
 @media (min-width: 1024px) {
-  .embla { --slide-size: 33.333%; } /* ~3 cards per view */
+  .embla {
+    --slide-size: 33.333%;
+  } /* ~3 cards per view */
 }
-
 
 .embla__viewport {
   overflow: hidden;
@@ -261,40 +374,46 @@ button svg path {
 }
 
 /* Ensure your card fills the slide nicely */
-.embla__slide > a { display: block; height: 100%; }
-.embla__slide .slider { height: var(--slide-height); }
+.embla__slide > a {
+  display: block;
+  height: 100%;
+}
+.embla__slide .slider {
+  height: var(--slide-height);
+}
 
 @media screen and (max-width: 700px) {
-	body {
-		margin: 0;
-	}
-	main {
-		margin: 0;
-		border: none;
-		border-radius: 0;
-		min-height: 90vh;
-	}
-	button, a, div, section {
-		cursor: auto;
-	}
-	.embla__container {
-		gap: .5rem;
-	}
-	.overview h1, .overview h2 {
-		font-size: 3.4rem;
-	}
-	.overview h2 {
-		line-height: 2.5rem;
-		margin-bottom: .4rem;
-	}
-	header {
-		display: none;
-	}
+  body {
+    margin: 0;
+  }
+  main {
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    min-height: 90vh;
+  }
+  button,
+  a,
+  div,
+  section {
+    cursor: auto;
+  }
+  .embla__container {
+    gap: 0.5rem;
+  }
+  .overview h1,
+  .overview h2 {
+    font-size: 3.4rem;
+  }
+
+  .overview h2 {
+    line-height: 2.5rem;
+    margin-bottom: 0.4rem;
+  }
 
   .chat-body {
-    top: 0;
-    bottom: 0 !important;
-    height: 100% !important;
+    bottom: 0;
+    height: calc(100% - 3.4rem) !important;
     position: fixed !important;
   }
 
@@ -310,11 +429,11 @@ button svg path {
     margin: 0 !important;
   }
 
-  .send  {
+  .send {
     aspect-ratio: 1/1;
-    margin-left: .5rem !important;
+    margin-left: 0.5rem !important;
   }
-	
+
   .chat-button-container {
     display: none;
   }
@@ -338,14 +457,13 @@ button svg path {
     max-width: 100%;
     border-right: none;
   }
-
 }
 
 /* Chat body style */
 .chat-body {
   bottom: 0;
   width: 100%;
-  height: 92%;
+  height: calc(100% - 3.4rem);
   display: flex;
   position: absolute;
   flex-direction: column;
@@ -380,7 +498,7 @@ button svg path {
 } */
 .message-body {
   overflow-y: auto;
-  padding-left: 1.2rem;
+  padding-left: 1.5rem;
 }
 
 .chat-activity {
@@ -388,6 +506,7 @@ button svg path {
   display: flex;
   padding: 1rem 0;
   align-items: center;
+  pointer-events: none;
 }
 
 .chat-activity .input {
@@ -406,7 +525,7 @@ button svg path {
   height: 100%;
   border: none;
   outline: none;
-  font-size: .9rem;
+  font-size: 0.9rem;
   background: none;
   padding-left: 1rem;
 }
@@ -420,13 +539,22 @@ button svg path {
   border-right: solid 1px var(--line);
 }
 
+.input,
+.send {
+  pointer-events: auto;
+}
 
 .chat-activity .send {
   margin-left: 1rem;
   border-radius: 0;
   border-radius: 4px;
+  cursor: pointer;
   background: var(--back);
   border: solid 1px var(--line);
+}
+
+.chat-activity .send:hover {
+  background: var(--gray);
 }
 
 .send.active {
