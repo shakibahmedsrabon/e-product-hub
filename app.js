@@ -19,10 +19,11 @@ textInput.addEventListener("keyup", function(e){
         setTimeout(function(){
             let reply = aiMessageUI(msg)
             setTimeout(function(){
-                reply.textContent = 'Replying: '+text;
+                reply[0].textContent = 'Replying: '+text;
                 ReceiveSound()
-                reply.classList.remove('waiting');
-                reply.classList.add('text-message', 'show');
+                reply[0].classList.remove('waiting');
+                reply[1].classList.remove('temp')
+                reply[0].classList.add('text-message', 'show');
                 scrollView(msg)
             }, 1000)
         }, 900)
@@ -124,7 +125,7 @@ function aiMessageUI(append = document, text = '') {
   section.append(icon, textNode);
   append.appendChild(section);
 
-  return textNode;
+  return [textNode, section];
 }
 
 function scrollView(container) {
