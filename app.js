@@ -3,7 +3,9 @@ let sendBtn = document.querySelector(".send");
 let BackBtn = document.querySelector(".back");
 let chatBody = document.querySelector(".chat-body");
 let chatBtn = document.querySelector(".chat-button");
+let chatBtnContainer = document.querySelector(".chat-button-container")
 let textInput = document.getElementById("prompt");
+let header = document.querySelector(".header")
 
 let chatMemory = [];
 const MEMORY_LIMIT = 4; // keep only the last 4 messages (~2 turns)
@@ -200,12 +202,7 @@ async function hydrateData(force = false) {
     showStockDetails()
   ]);
 
-  const detailedCatalog = Array.isArray(stockDetailDoc?.catalog) ? stockDetailDoc.catalog : [];
-  productDetailEntries = flattenStockCatalog(detailedCatalog);
-  if (productDetailEntries.length && productDetailEntries.length !== productList.length) {
-    console.warn('Stock detail mismatch:', productDetailEntries.length, productList.length);
-  }
-
+  // First, load the basic product list
   productList = (Array.isArray(stockItems) ? stockItems : [])
     .map(entry => {
       if (!entry) return null;
@@ -224,8 +221,20 @@ async function hydrateData(force = false) {
     })
     .filter(Boolean);
 
-  productList = productList.map((entry, index) => {
-    const detail = productDetailEntries[index] || null;
+  // Then load and process the detailed catalog
+  const detailedCatalog = Array.isArray(stockDetailDoc?.catalog) ? stockDetailDoc.catalog : [];
+  productDetailEntries = flattenStockCatalog(detailedCatalog);
+  
+  // Only show mismatch warning if we have both lists and they don't match
+  if (productList.length > 0 && productDetailEntries.length > 0 && 
+      productList.length !== productDetailEntries.length) {
+    console.warn('Stock detail mismatch:', productDetailEntries.length, productList.length);
+  }
+
+  // Merge the detailed information with the product list
+  productList = productList.map((entry) => {
+    // Find matching detail by ID instead of index to be more reliable
+    const detail = productDetailEntries.find(d => d && d.id === entry.id) || null;
     const price = entry.price ?? detail?.price ?? null;
     const categories = Array.isArray(detail?.categories) ? detail.categories : [];
     return { ...entry, price, detail, categories };
@@ -932,6 +941,8 @@ function openChatMenu() {
     }
     BackBtn.classList.remove('close');
     chatBody.classList.remove('close');
+    header.classList.remove('close')
+    chatBtnContainer.classList.add('close')
     return true;
 }
 
@@ -970,6 +981,8 @@ window.addEventListener('popstate', CheckURL);
 BackBtn.addEventListener('click', function(){
     BackBtn.classList.add('close');
     chatBody.classList.add('close');
+    chatBtnContainer.classList.remove('close');
+    header.classList.add('close')
 });
 
 chatBtn.addEventListener('click', openChatMenu);

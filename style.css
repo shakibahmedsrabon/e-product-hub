@@ -96,7 +96,16 @@ header {
   border-radius: 0;
   background: none;
   position: absolute;
+  opacity: 1;
+  filter: none;
   border-left: solid 1px var(--line);
+  transition: .7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.back.close {
+  opacity: 0;
+  right: -10rem;
+  filter: blur(2px);
 }
 
 .back:hover {
@@ -131,6 +140,7 @@ header {
 
 .chat-button-container {
   gap: 1rem;
+  opacity: 1;
   right: 1rem;
   bottom: 1rem;
   width: 100%;
@@ -141,6 +151,14 @@ header {
   align-items: center;
   pointer-events: none;
   justify-content: flex-end;
+  translate: all .2s ease;
+  transition-delay: .4s;
+}
+
+.chat-button-container.close {
+  opacity: 0;
+  visibility: hidden;
+  transition-delay: 0s;
 }
 
 button {
@@ -711,6 +729,18 @@ button svg path {
   section {
     cursor: auto;
   }
+
+  .header {
+    opacity: 1;
+    transform: translateY(0rem);
+    transition: .7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  .header.close {
+    opacity: 0;
+    transform: translateY(-10rem);
+  }
+
   .embla__container {
     gap: 0.5rem;
   }
@@ -748,7 +778,8 @@ button svg path {
   }
 
   .chat-button-container {
-    display: none;
+    bottom: 2rem;
+    position: fixed;
   }
 
   .chat-activity:has(input:focus) {
@@ -779,40 +810,36 @@ button svg path {
   height: calc(100% - 3.4rem);
   display: flex;
   position: absolute;
+  filter: blur(0);
   flex-direction: column;
   background: var(--back);
   border-radius: var(--radius);
   justify-content: space-between;
+  transform: translate(1);
+  transform-origin: bottom right;
+  transition: .4s cubic-bezier(0.445, 0.05, 0.55, 0.95);
 }
 
-/* .chat-body {
+.chat-body.close {
     border-radius: 30%;
     overflow: hidden;
-    transform: scale(.3);
-    transform-origin: bottom right;
-    transition: .3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+    transform: scale(0);
+    filter: blur(1px);
 }
 
-.chat-body .message-body,
-.chat-body .chat-activity {
+.chat-body.close .message-body,
+.chat-body.close .chat-activity {
   opacity: 0;
-   transition: .3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
-   transition-delay: .2s;
+  transition: .1s ease;
+  transition-delay: 0s;
 }
 
-.chat-body:hover {
-  border-radius: 0%;
-  transform: scale(1);
-}
-
-.chat-body:hover .message-body,
-.chat-body:hover .chat-activity {
-  opacity: 1;
-} */
 .message-body {
   overflow-y: auto;
   padding-left: 1.5rem;
   padding-bottom: 10rem;
+  transition: .3s ease;
+  transition-delay: .5s;
 }
 
 .chat-activity {
@@ -821,6 +848,8 @@ button svg path {
   padding: 1rem 0;
   align-items: center;
   pointer-events: none;
+  transition: .7s ease;
+   transition-delay: .5s;
 }
 
 .chat-activity .input {
