@@ -368,12 +368,12 @@ function extractJsonBlock(text) {
   return { message: visible, payload };
 }
 
-// --- Chat call: return RAW model text; parsing is done in UI with extractJsonBlock ---
+// --- Chat API call to our backend ---
 async function Chat(prompt, memory = []) {
   try {
     await hydrateData();
-    const recent = memory.slice(-MEMORY_LIMIT);
-
+    
+    // Prepare catalog data
     const catalog = productList.map(item => ({
       id: item.id,
       label: item.label,
@@ -381,6 +381,7 @@ async function Chat(prompt, memory = []) {
       categories: Array.isArray(item.categories) ? item.categories : []
     }));
 
+    // Prepare contacts data
     const contacts = contactList.map(item => ({
       id: item.id,
       label: item.label,
@@ -388,36 +389,31 @@ async function Chat(prompt, memory = []) {
       action: item.action ?? null
     }));
 
-    const knowledge = JSON.stringify({ currency: currencyLabel, catalog, contacts });
-
-    const messages = [
-      { role: "system", content: persona },
-      { role: "system", content: knowledge },
-      ...recent,
-      { role: "user", content: prompt }
-    ];
-
-    const response = await fetch("https://api.mistral.ai/v1/chat/completions", {
-      method: "POST",
+    // Call our API endpoint
+    const response = await fetch('/api/chat', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
-        // !!! SECURITY: proxy this through your backend; don't ship keys to the client.
-        Authorization: `Bearer 9MPR2TiLv72aZhLpzG8f70ndYN3zrzqt`
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        model: "mistral-tiny",
-        temperature: 0.2,
-        max_tokens: 700,
-        messages
-      }),
+        prompt,
+        memory,
+        products: catalog,
+        contacts
+      })
     });
 
-    if (!response.ok) throw new Error("Failed to fetch from Mistral AI");
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.error || 'Failed to get response from API');
+    }
+
     const data = await response.json();
-    return (data.choices?.[0]?.message?.content || "").trim();
+    return data.message;
+    
   } catch (err) {
-    console.error("Chat Error:", err);
-    return "Something went wrong.";
+    console.error('Chat API Error:', err);
+    return 'Sorry, I encountered an error. Please try again.';
   }
 }
 
@@ -856,26 +852,35 @@ async function handleSend(text) {
 
   const reply = aiMessageUI(msg);
 
-  // Ask the model with a small memory context
-  const raw = await Chat(text, chatMemory);
-  const { message: visibleText, payload } = extractJsonBlock(raw || "");
+  try {
+    // Call our API endpoint
+    const response = await Chat(text, chatMemory);
+    const { message: visibleText, payload } = extractJsonBlock(response || "");
 
-  // Show only the human-friendly text line
-  reply[0].textContent = '';
-  reply[0].textContent = visibleText || "...";
-  ReceiveSound();
-  reply[0].classList.remove('waiting');
-  reply[1].classList.remove('temp');
-  reply[0].classList.add('text-message', 'show');
-  scrollView(msg);
+    // Show the response text
+    reply[0].textContent = '';
+    reply[0].textContent = visibleText || "...";
+    ReceiveSound();
+    reply[0].classList.remove('waiting');
+    reply[1].classList.remove('temp');
+    reply[0].classList.add('text-message', 'show');
+    scrollView(msg);
 
-  // If the model intentionally provided a payload, handle it.
-  if (payload && typeof payload === "object") {
-    try {
-      handlePayload(payload);
-    } catch (e) {
-      console.warn("Payload handling error:", e);
+    // Handle any payload from the response
+    if (payload && typeof payload === "object") {
+      try {
+        handlePayload(payload);
+      } catch (e) {
+        console.warn("Payload handling error:", e);
+      }
     }
+    
+    // Return the raw response for memory
+    return response;
+  } catch (err) {
+    console.error('Error in handleSend:', err);
+    reply[0].textContent = 'Sorry, there was an error processing your request.';
+    return null;
   }
 
   // Update memory after successful render.
@@ -916,35 +921,58 @@ function MessageUI(text = '', type = false){
     return stricture;
 }
 
-function CheckURL() {
-  const hash = window.location.hash.slice(1);
-  const value = hash.replace(/^ai=/, '');
-  console.log(decodeURIComponent(value));
-}
-
-CheckURL()
-
-
-// 9MPR2TiLv72aZhLpzG8f70ndYN3zrzqt
-
-window.addEventListener('popstate', CheckURL)
-
-BackBtn.addEventListener('click', function(){
-    BackBtn.classList.add('close');
-    chatBody.classList.add('close');
-})
-
-chatBtn.addEventListener('click', function(){
+// Function to open the chat menu
+function openChatMenu() {
     clearExpiredBlock();
     applyBlockState({ silent: true });
     if (isUserBlocked()) {
         showBlockNotice();
         applyBlockState();
-        return;
+        return false;
     }
     BackBtn.classList.remove('close');
     chatBody.classList.remove('close');
-})
+    return true;
+}
+
+// Function to handle URL hash changes and auto-messages
+async function CheckURL() {
+    const hash = window.location.hash.slice(1);
+    if (!hash.startsWith('ai=')) return;
+    
+    const message = decodeURIComponent(hash.replace(/^ai=/, '').trim());
+    if (!message) return;
+    
+    // Open chat menu if not already open
+    const wasClosed = chatBody.classList.contains('close');
+    if (wasClosed) {
+        if (!openChatMenu()) return; // Don't proceed if blocked
+        // Small delay to allow chat to open
+        await new Promise(resolve => setTimeout(resolve, 300));
+    }
+    
+    // Set the input value and trigger the send
+    textInput.value = message;
+    sendBtn.classList.add('active');
+    await handleSend(message);
+    
+    // Clear the hash without adding to history
+    history.replaceState(null, '', ' ');
+}
+
+// Initial check on page load
+CheckURL();
+
+// Listen for URL changes
+window.addEventListener('popstate', CheckURL);
+
+// Chat button click handlers
+BackBtn.addEventListener('click', function(){
+    BackBtn.classList.add('close');
+    chatBody.classList.add('close');
+});
+
+chatBtn.addEventListener('click', openChatMenu);
 
 // Sound for outgoing messages
 const outgoing = new Audio("./sounds/outgoing.mp3");
