@@ -1,0 +1,202 @@
+{
+  "ai_name": "E Product Hub BD Ai Assistant",
+  "policy": {
+    "scope": "Answer ONLY about the products listed in this catalog. If a question is outside this scope, respond with the out_of_scope_response.",
+    "out_of_scope_response": "Sorry, I can only answer questions about the E Product Hub BD pricing and details listed in my catalog.",
+    "currency": "BDT",
+    "vendor_label": "E Product Hub BD",
+    "notes": "Prices may vary depending on market conditions. Please confirm the latest price before placing your order."
+  },
+  "catalog": [
+    {
+      "product": "LinkedIn Premium",
+      "categories": ["professional", "career"],
+      "plans": [
+        { "name": "Career", "duration": "3 months", "price": 1999 },
+        { "name": "Business", "duration": "3 months", "price": 2499 },
+        { "name": "Sales Navigator Core", "duration": "3 months", "price": 2799 }
+      ],
+      "details": [
+        "No login details required",
+        "Subscription activated directly on your personal LinkedIn account"
+      ],
+      "delivery_time": "10–30 minutes"
+    },
+    {
+      "product": "Eleven Labs",
+      "categories": ["ai", "voice"],
+      "plans": [
+        { "name": "Standard", "duration": "3 months", "price": 1999, "total_credits": 300000, "monthly_credits": 100000 }
+      ],
+      "details": [
+        "Personal account",
+        "Access via Gmail and password (login credentials provided)"
+      ],
+      "delivery_time": "10 minutes – 2 hours"
+    },
+    {
+      "product": "Adobe Creative Cloud All Apps Pro + Unlimited Adobe Stock (Enterprise Plan)",
+      "categories": ["creative", "design"],
+      "plans": [
+        { "name": "1 Month", "duration": "1 month", "price": 999 },
+        { "name": "3 Months", "duration": "3 months", "price": 2499 },
+        { "name": "6 Months", "duration": "6 months", "price": 4999 },
+        { "name": "12 Months", "duration": "12 months", "price": 8999 }
+      ],
+      "details": [
+        "Unlimited Adobe Stock access (Images & Vectors only, not videos)",
+        "1TB cloud storage",
+        "Subscription on your personal email via invitation",
+        "No shared account — personal access only",
+        "Works on Windows & macOS",
+        "Use on 2 devices simultaneously",
+        "Includes 54+ Creative Cloud apps (Photoshop, Illustrator, Premiere Pro, After Effects, etc.)",
+        "Generative AI credits: 4000 per month"
+      ],
+      "delivery_time": "10–30 minutes"
+    },
+    {
+      "product": "ChatGPT Plus",
+      "categories": ["ai", "assistant"],
+      "plans": [
+        { "name": "1 Month", "duration": "1 month", "price": 399 },
+        { "name": "2 Months", "duration": "2 months", "price": 749 },
+        { "name": "3 Months", "duration": "3 months", "price": 1149 },
+        { "name": "6 Months", "duration": "6 months", "price": 2299 }
+      ],
+      "details": [
+        "Access all features and all models",
+        "Multiple device login supported",
+        "Personal account — login through your personal email"
+      ],
+      "delivery_time": "2–10 minutes"
+    },
+    {
+      "product": "Netflix",
+      "categories": ["entertainment", "streaming"],
+      "plans": [
+        {
+          "name": "Mobile/Laptop/PC",
+          "tiers": [
+            { "duration": "1 month", "price": 349 },
+            { "duration": "2 months", "price": 649 },
+            { "duration": "3 months", "price": 999 },
+            { "duration": "6 months", "price": 1999 },
+            { "duration": "12 months", "price": 3999 }
+          ]
+        },
+        {
+          "name": "TV + All Devices",
+          "tiers": [
+            { "duration": "1 month", "price": 399 },
+            { "duration": "2 months", "price": 749 },
+            { "duration": "3 months", "price": 1149 },
+            { "duration": "6 months", "price": 2249 },
+            { "duration": "12 months", "price": 4649 }
+          ]
+        }
+      ],
+      "details": [
+        "Personal Netflix account",
+        "Login on up to 2 devices",
+        "Supports 4K video quality"
+      ],
+      "delivery_time": "5 minutes – 1 hour"
+    },
+    {
+      "product": "Prime Video",
+      "categories": ["entertainment", "streaming"],
+      "plans": [
+        {
+          "name": "Mobile/Laptop/PC",
+          "tiers": [
+            { "duration": "1 month", "price": 149 },
+            { "duration": "2 months", "price": 249 },
+            { "duration": "3 months", "price": 399 },
+            { "duration": "6 months", "price": 799 },
+            { "duration": "12 months", "price": 1599 }
+          ]
+        },
+        {
+          "name": "TV + All Devices",
+          "tiers": [
+            { "duration": "1 month", "price": 199 },
+            { "duration": "2 months", "price": 349 },
+            { "duration": "3 months", "price": 549 },
+            { "duration": "6 months", "price": 999 },
+            { "duration": "12 months", "price": 2199 }
+          ]
+        }
+      ],
+      "details": [
+        "Personal Prime Video account",
+        "Ad-free streaming experience"
+      ],
+      "delivery_time": "5 minutes – 1 hour"
+    },
+    {
+      "product": "Grammarly Premium",
+      "categories": ["writing", "productivity"],
+      "plans": [
+        { "name": "1 Month", "duration": "1 month", "price": 279 },
+        { "name": "3 Months", "duration": "3 months", "price": 799 },
+        { "name": "6 Months", "duration": "6 months", "price": 1599 },
+        { "name": "12 Months (Own Personal Email)", "duration": "12 months", "price": 2500 }
+      ],
+      "details": [
+        "Personal Grammarly Premium account",
+        "Access via email & password",
+        "Works on PC, Laptop, and Mobile",
+        "Includes advanced grammar, plagiarism, and AI writing suggestions"
+      ],
+      "delivery_time": "5 minutes – 1 hour"
+    },
+    {
+      "product": "Gemini Pro",
+      "categories": ["ai", "assistant"],
+      "plans": [
+        { "name": "1 Month", "duration": "1 month", "price": 170 },
+        { "name": "3 Months", "duration": "3 months", "price": 400 },
+        { "name": "6 Months", "duration": "6 months", "price": 700 },
+        { "name": "12 Months", "duration": "12 months", "price": 1000 }
+      ],
+      "details": [
+        "Personal account",
+        "Access via account & password",
+        "Works on PC, Laptop, and Mobile"
+      ],
+      "delivery_time": "5 minutes – 1 hour"
+    },
+    {
+      "product": "Claude AI",
+      "categories": ["ai", "assistant"],
+      "plans": [
+        { "name": "1 Month (Shared Account)", "duration": "1 month", "price": 650 },
+        { "name": "1 Month (Personal Account)", "duration": "1 month", "price": 2500 }
+      ],
+      "details": [
+        "Available in Shared and Personal account options",
+        "Access via account & password",
+        "Works on PC, Laptop, and Mobile"
+      ],
+      "delivery_time": "2 hours – 24 hours"
+    },
+    {
+      "product": "Canva Pro",
+      "categories": ["creative", "design"],
+      "plans": [
+        { "name": "1 Month", "duration": "1 month", "price": 50 },
+        { "name": "6 Months", "duration": "6 months", "price": 300 },
+        { "name": "12 Months", "duration": "12 months", "price": 500 }
+      ],
+      "details": [
+        "Personal Canva Pro account",
+        "Access via your personal email (not shared)",
+        "Works on PC, Laptop, and Mobile"
+      ],
+      "delivery_time": "5 minutes – 1 hour"
+    }
+  ]
+}
+
+

@@ -1,0 +1,11 @@
+{
+  "v": 2,
+  "c": [
+    ["wa", "WhatsApp Support"],
+    ["em", "Email Support"],
+    ["ph", "Direct Phone Support"],
+    ["tg", "Telegram Channel"],
+    ["msgr", "Messenger Channel"],
+    ["wach", "Official WhatsApp Channel"]
+  ]
+}

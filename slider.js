@@ -11,7 +11,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // Pure swipe/drag setup (no autoplay, no buttons)
   EmblaCarousel(viewport, {
     loop: true,
-    align: 'start',
-    skipSnaps: false
+    align: 'center',
+    containScroll: 'trimSnaps',
+    inViewThreshold: 0.75,
+    slidesToScroll: 1,
+    dragFree: false,
+    speed: 6
   });
 });

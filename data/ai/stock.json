@@ -1,0 +1,60 @@
+{
+  "v": 1,
+  "cur": "BDT",
+  "items": [
+    ["p1",  "LinkedIn Premium — Career — 3m", 1999],
+    ["p2",  "LinkedIn Premium — Business — 3m", 2499],
+    ["p3",  "LinkedIn Premium — Sales Navigator Core — 3m", 2799],
+
+    ["p4",  "Eleven Labs — Standard — 3m", 1999],
+
+    ["p5",  "Adobe CC All Apps Pro + Stock (Ent.) — 1m",  999],
+    ["p6",  "Adobe CC All Apps Pro + Stock (Ent.) — 3m",  2499],
+    ["p7",  "Adobe CC All Apps Pro + Stock (Ent.) — 6m",  4999],
+    ["p8",  "Adobe CC All Apps Pro + Stock (Ent.) — 12m", 8999],
+
+    ["p9",  "ChatGPT Plus — 1m",  399],
+    ["p10", "ChatGPT Plus — 2m",  749],
+    ["p11", "ChatGPT Plus — 3m",  1149],
+    ["p12", "ChatGPT Plus — 6m",  2299],
+
+    ["p13", "Netflix — Mobile/Laptop/PC — 1m",  349],
+    ["p14", "Netflix — Mobile/Laptop/PC — 2m",  649],
+    ["p15", "Netflix — Mobile/Laptop/PC — 3m",  999],
+    ["p16", "Netflix — Mobile/Laptop/PC — 6m",  1999],
+    ["p17", "Netflix — Mobile/Laptop/PC — 12m", 3999],
+    ["p18", "Netflix — TV + All Devices — 1m",  399],
+    ["p19", "Netflix — TV + All Devices — 2m",  749],
+    ["p20", "Netflix — TV + All Devices — 3m",  1149],
+    ["p21", "Netflix — TV + All Devices — 6m",  2249],
+    ["p22", "Netflix — TV + All Devices — 12m", 4649],
+
+    ["p23", "Prime Video — Mobile/Laptop/PC — 1m",  149],
+    ["p24", "Prime Video — Mobile/Laptop/PC — 2m",  249],
+    ["p25", "Prime Video — Mobile/Laptop/PC — 3m",  399],
+    ["p26", "Prime Video — Mobile/Laptop/PC — 6m",  799],
+    ["p27", "Prime Video — Mobile/Laptop/PC — 12m", 1599],
+    ["p28", "Prime Video — TV + All Devices — 1m",  199],
+    ["p29", "Prime Video — TV + All Devices — 2m",  349],
+    ["p30", "Prime Video — TV + All Devices — 3m",  549],
+    ["p31", "Prime Video — TV + All Devices — 6m",  999],
+    ["p32", "Prime Video — TV + All Devices — 12m", 2199],
+
+    ["p33", "Grammarly Premium — 1m",  279],
+    ["p34", "Grammarly Premium — 3m",  799],
+    ["p35", "Grammarly Premium — 6m",  1599],
+    ["p36", "Grammarly Premium — 12m (Own Personal Email)", 2500],
+
+    ["p37", "Gemini Pro — 1m",  170],
+    ["p38", "Gemini Pro — 3m",  400],
+    ["p39", "Gemini Pro — 6m",  700],
+    ["p40", "Gemini Pro — 12m", 1000],
+
+    ["p41", "Claude AI — 1m (Shared Account)",   650],
+    ["p42", "Claude AI — 1m (Personal Account)", 2500],
+
+    ["p43", "Canva Pro — 1m",  50],
+    ["p44", "Canva Pro — 6m",  300],
+    ["p45", "Canva Pro — 12m", 500]
+  ]
+}

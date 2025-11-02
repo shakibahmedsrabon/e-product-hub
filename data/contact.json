@@ -1,0 +1,34 @@
+{
+  "contact_info": {
+    "whatsapp": {
+      "action": "whatsapp",
+      "value": "https://wa.me/8801570210107",
+      "label": "WhatsApp Support"
+    },
+    "email": {
+      "action": "mail",
+      "value": "support@eproducthubbd.com",
+      "label": "Email Support"
+    },
+    "phone": {
+      "action": "call",
+      "value": "+8801570210107",
+      "label": "Direct Phone Support"
+    },
+    "telegram": {
+      "action": "telegram",
+      "value": "https://t.me/eproducthubbd",
+      "label": "Telegram Channel"
+    },
+    "messenger_channel": {
+      "action": "messenger",
+      "value": "https://www.messenger.com/channel/theeproducthubbd",
+      "label": "Messenger Channel"
+    },
+    "whatsapp_channel": {
+      "action": "whatsapp_channel",
+      "value": "https://whatsapp.com/channel/0029Vb6ZxpDDp2Q161Y44S3W",
+      "label": "Official WhatsApp Channel"
+    }
+  }
+}

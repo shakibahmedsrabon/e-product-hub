@@ -1,4 +1,4 @@
-export default async function handler(req, res) {
+export default async function handler(req, res, memory = []) {
   if (req.method !== "POST") {
     res.setHeader("Allow", ["POST"]);
     return res.status(405).json({ error: "Method Not Allowed" });
@@ -16,7 +16,7 @@ export default async function handler(req, res) {
         .status(400)
         .json({ error: "Missing 'prompt' in request body." });
     }
-
+    const recent = memory.slice(-MEMORY_LIMIT);
     const persona = `You are ecomers website Assisten Product V3 AI`;
 
     const upstream = await fetch("https://api.mistral.ai/v1/chat/completions", {
@@ -29,6 +29,7 @@ export default async function handler(req, res) {
         model: "mistral-tiny",
         messages: [
           { role: "system", content: persona },
+          ...recent,
           { role: "user", content: prompt },
         ],
       }),
