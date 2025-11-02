@@ -77,28 +77,23 @@
       "plans": [
         {
           "name": "Mobile/Laptop/PC",
-          "duration": "1 month",
-          "price": 349
-        },
-        {
-          "name": "Mobile/Laptop/PC",
-          "duration": "6 months",
-          "price": 1999
-        },
-        {
-          "name": "TV + All Devices",
-          "duration": "1 month",
-          "price": 399
+          "tiers": [
+            { "duration": "1 month", "price": 349 },
+            { "duration": "2 months", "price": 649 },
+            { "duration": "3 months", "price": 999 },
+            { "duration": "6 months", "price": 1999 },
+            { "duration": "12 months", "price": 3999 }
+          ]
         },
         {
           "name": "TV + All Devices",
-          "duration": "6 months",
-          "price": 2249
-        },
-        {
-          "name": "TV + All Devices",
-          "duration": "12 months",
-          "price": 3999
+          "tiers": [
+            { "duration": "1 month", "price": 399 },
+            { "duration": "2 months", "price": 749 },
+            { "duration": "3 months", "price": 1149 },
+            { "duration": "6 months", "price": 2249 },
+            { "duration": "12 months", "price": 4649 }
+          ]
         }
       ],
       "details": [
@@ -113,27 +108,31 @@
       "categories": ["entertainment", "streaming"],
       "plans": [
         {
-          "name": "Monthly",
-          "duration": "1 month",
-          "price": 299
+          "name": "Mobile/Laptop/PC",
+          "tiers": [
+            { "duration": "1 month", "price": 149 },
+            { "duration": "2 months", "price": 249 },
+            { "duration": "3 months", "price": 399 },
+            { "duration": "6 months", "price": 799 },
+            { "duration": "12 months", "price": 1599 }
+          ]
         },
         {
-          "name": "3 Months",
-          "duration": "3 months",
-          "price": 799
-        },
-        {
-          "name": "12 Months",
-          "duration": "12 months",
-          "price": 1999
+          "name": "TV + All Devices",
+          "tiers": [
+            { "duration": "1 month", "price": 199 },
+            { "duration": "2 months", "price": 349 },
+            { "duration": "3 months", "price": 549 },
+            { "duration": "6 months", "price": 999 },
+            { "duration": "12 months", "price": 2199 }
+          ]
         }
       ],
       "details": [
-        "Personal Amazon Prime Video account",
-        "Access to Prime Video content",
-        "Watch on any device"
+        "Personal Prime Video account",
+        "Ad-free streaming experience"
       ],
-      "delivery_time": "5-15 minutes"
+      "delivery_time": "5 minutes – 1 hour"
     },
     {
       "product": "Grammarly Premium",
@@ -199,3 +198,4 @@
     }
   ]
 }
+

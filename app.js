@@ -678,12 +678,39 @@ function renderProductCards(ids = []) {
       card.appendChild(list);
     }
 
-    const cta = document.createElement("button");
-    cta.type = "button";
-    cta.className = "chat-card__cta";
-    cta.dataset.id = id;
-    cta.textContent = "Ask about this";
-    cta.addEventListener("click", () => textInput?.focus());
+    const cta = document.createElement("a");
+    const askBtn = document.createElement("button");
+    askBtn.className = "chat-card__cta";
+    askBtn.textContent = "Buy Now";
+    cta.appendChild(askBtn);
+    
+    // Create WhatsApp message with product details
+    const productTitle = detail?.product || product.label || 'Product';
+    const planName = detail?.plan || '';
+    const duration = detail?.duration || '';
+    const price = formatPrice(detail?.price ?? product.price) || '';
+    
+    let message = `*${productTitle}*`;
+    if (planName) message += `%0APlan: ${planName}`;
+    if (duration) message += `%0ADuration: ${duration}`;
+    if (price) message += `%0APrice: ${price}`;
+    message += '%0A%0AI would like to know more about this product.';
+    
+    // Set href for WhatsApp
+    cta.href = `https://wa.me/8801570210107?text=${message}`;
+    
+    // Open in new tab on desktop, same tab on mobile
+    cta.target = window.innerWidth > 768 ? '_blank' : '_self';
+    
+    // Add click handler to open in appropriate window
+    cta.addEventListener('click', (e) => {
+      if (window.innerWidth <= 768) {
+        e.preventDefault();
+        window.location.href = cta.href;
+      }
+      // For desktop, default anchor behavior (new tab) will work
+    });
+    
     card.appendChild(cta);
 
     track.appendChild(card);
@@ -737,9 +764,6 @@ function renderContactButtons(ids = [], highlight = false) {
     const isLink = Boolean(href);
     const node = document.createElement(isLink ? "a" : "button");
     node.className = "chat-contact up";
-    if (highlight && index === 0) {
-      node.classList.add("chat-contact--primary");
-    }
     node.dataset.id = id;
 
     const labelSpan = document.createElement("span");
