@@ -489,7 +489,20 @@ button svg path {
 
 @media screen and (max-width: 640px) {
   .chat-attachment {
-    padding-left: 2.5rem;
+    padding-left: 0;
+  }
+
+  .message-body {
+    padding-left: 0 !important;
+  }
+  
+  .chat-card {
+    height: fit-content !important;
+  }
+
+  .message,
+  .chat-contacts {
+    padding-left: 1.5rem;
   }
 
   .chat-card {
