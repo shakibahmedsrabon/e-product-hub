@@ -267,8 +267,13 @@ async function showStockDetails() {
   }
 }
 
-function flattenStockCatalog(catalog = []) {
+function flattenStockCatalog(catalog = [], idList = []) {
   const entries = [];
+  function pushEntry(detail) {
+    const index = entries.length;
+    const id = idList[index] || null;
+    entries.push({ id, ...detail });
+  }
   catalog.forEach(item => {
     if (!item) return;
     const base = {
@@ -291,7 +296,7 @@ function flattenStockCatalog(catalog = []) {
         if (Array.isArray(plan.tiers) && plan.tiers.length) {
           plan.tiers.forEach(tier => {
             if (!tier) return;
-            entries.push({
+            pushEntry({
               product: base.product,
               plan: planName,
               duration: tier.duration || planDuration,
@@ -304,7 +309,7 @@ function flattenStockCatalog(catalog = []) {
             });
           });
         } else {
-          entries.push({
+          pushEntry({
             product: base.product,
             plan: planName,
             duration: planDuration,
@@ -318,7 +323,7 @@ function flattenStockCatalog(catalog = []) {
         }
       });
     } else {
-      entries.push({
+      pushEntry({
         product: base.product,
         plan: null,
         duration: null,
@@ -368,9 +373,11 @@ async function hydrateData(force = false) {
     })
     .filter(Boolean);
 
+  const productIds = productList.map(item => item.id);
+
   // Then load and process the detailed catalog
   const detailedCatalog = Array.isArray(stockDetailDoc?.catalog) ? stockDetailDoc.catalog : [];
-  productDetailEntries = flattenStockCatalog(detailedCatalog);
+  productDetailEntries = flattenStockCatalog(detailedCatalog, productIds);
   
   // Only show mismatch warning if we have both lists and they don't match
   if (productList.length > 0 && productDetailEntries.length > 0 && 
