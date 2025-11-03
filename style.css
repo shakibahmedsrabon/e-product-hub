@@ -137,6 +137,7 @@ header {
 .overview h2 {
   font-size: 4rem;
   font-family: Afacad;
+  line-height: 4rem;
 }
 
 .overview h1 {
