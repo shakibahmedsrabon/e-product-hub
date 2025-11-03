@@ -4,6 +4,7 @@
   --line: #bdbdbd;
   --black: #323232;
   --gray: #f2f2f2;
+  --slider-delay: 1s;
 }
 
 @font-face {
@@ -65,6 +66,7 @@ body {
   margin: 4rem;
   font-family: Afacad;
   background: var(--back);
+  color: var(--black);
 }
 
 main {
@@ -86,6 +88,11 @@ header {
   overflow: hidden;
   position: relative;
   border-bottom: solid 1px var(--line);
+  color: inherit;
+}
+
+.header .dynamic {
+  color: inherit;
 }
 
 .back {
@@ -120,8 +127,10 @@ header {
   text-align: center;
   --overview-fade-start: 140ms;
   --overview-fade-gap: 180ms;
+  --overview-fade-steps: 2;
   --overview-fade-duration: 620ms;
   --overview-fade-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  color: var(--black);
 }
 
 .overview h1,
@@ -135,6 +144,14 @@ header {
   line-height: 1rem;
   font-weight: 400;
   color: var(--line);
+}
+
+.overview h2 {
+  color: currentColor;
+}
+
+.overview .text {
+  color: currentColor;
 }
 
 .overview.overview--fx h1,
@@ -576,10 +593,14 @@ button svg path {
   --slider-card-width: 300px;
   --slider-gap: 1rem;
   --slider-scale-default: 1;
-  --slider-fade-start: 220ms;
+  --slider-fade-start: var(--slider-delay, 220ms);
   --slider-fade-gap: 160ms;
   --slider-fade-duration: 520ms;
   --slider-fade-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.overview .slider-container {
+  --slider-fade-start: calc(var(--slider-delay, 0ms) + var(--overview-fade-start, 0ms) + var(--overview-fade-gap, 0ms) * var(--overview-fade-steps, 0) + var(--overview-fade-duration, 0ms));
 }
 
 .slider-container .embla {
@@ -591,7 +612,6 @@ button svg path {
 
 .slider-container .embla__viewport {
   overflow: hidden;
-  padding: 0 var(--slider-gap);
   margin: 0 auto;
 }
 
@@ -1005,6 +1025,7 @@ button svg path {
   font-size: 0.9rem;
   background: none;
   padding-left: 1rem;
+  color: var(--black);
 }
 .chat-activity textarea {
     width: 100%;
@@ -1015,6 +1036,12 @@ button svg path {
     padding: .7rem;
     padding-left: 1rem;
     font-family: 'Afacad';
+    color: var(--black);
+}
+
+.chat-activity input::placeholder,
+.chat-activity textarea::placeholder {
+  color: var(--line);
 }
 
 .chat-activity textarea::-webkit-scrollbar {

@@ -1,0 +1,45 @@
+{
+  "name": "E Product Hub BD",
+  "short_name": "Product Hub",
+  "description": "Genuine AI tools, streaming, and productivity subscriptions with instant activation in Bangladesh.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#fafafa",
+  "theme_color": "#fafafa",
+  "icons": [
+    {
+      "src": "pwa/Dark/android/android-launchericon-192-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "pwa/Dark/android/android-launchericon-512-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "pwa/Light/android/android-launchericon-192-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "pwa/Light/android/android-launchericon-512-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Contact Support",
+      "short_name": "Support",
+      "description": "Open WhatsApp to contact the team.",
+      "url": "https://wa.me/8801570210107?text=I%20want%20to%20buy%20GPT,%20refer:%20website.com"
+    }
+  ]
+}

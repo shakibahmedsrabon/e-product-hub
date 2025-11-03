@@ -8,6 +8,15 @@ let chatBtnContainer = document.querySelector(".chat-button-container");
 let textInput = document.getElementById("prompt");
 let header = document.querySelector(".header");
 
+// Register the PWA service worker for installability and offline fallback UI
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker
+      .register("./sw.js")
+      .catch(err => console.error("Service worker registration failed:", err));
+  });
+}
+
 const SNOOZE_HOURS = 7
 const AUTOSHOW_DELAY_MS = 2000
 const SNOOZE_KEY = "chat_snooze_until"
