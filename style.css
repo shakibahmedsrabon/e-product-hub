@@ -573,15 +573,13 @@ button svg path {
   overflow: hidden;
   padding: 0 var(--slider-gap);
   margin: 0 auto;
-  width: 100%;
-  max-width: fit-content;
-  overflow: hidden;
 }
 
 .slider-container .embla__container {
   display: flex;
   gap: var(--slider-gap);
   margin: 0;
+  justify-content: center;
   touch-action: pan-y;
 }
 
@@ -655,6 +653,10 @@ button svg path {
 
   .slider-container .slider {
     min-height: 280px;
+  }
+
+  .slider-container .embla__container {
+    justify-content: normal !important;
   }
 }
 
