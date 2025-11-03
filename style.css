@@ -118,6 +118,10 @@ header {
 .overview {
   margin-top: 5rem;
   text-align: center;
+  --overview-fade-start: 140ms;
+  --overview-fade-gap: 180ms;
+  --overview-fade-duration: 620ms;
+  --overview-fade-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 .overview h1,
@@ -133,9 +137,28 @@ header {
   color: var(--line);
 }
 
+.overview.overview--fx h1,
+.overview.overview--fx h2,
+.overview.overview--fx .text {
+  opacity: 0;
+  filter: blur(10px);
+  transform: translate3d(0, 28px, 0);
+}
+
+.overview.overview--animated h1,
+.overview.overview--animated h2,
+.overview.overview--animated .text {
+  animation: overviewFade var(--overview-fade-duration) var(--overview-fade-ease) forwards;
+  animation-delay: calc(var(--overview-fade-start) + var(--overview-fade-gap) * var(--child-index, 0));
+}
+
 .text {
   font-family: Afacad;
   line-height: 1rem;
+}
+
+.overview .text {
+  display: inline-block;
 }
 
 .chat-button-container {
@@ -553,6 +576,10 @@ button svg path {
   --slider-card-width: 300px;
   --slider-gap: 1rem;
   --slider-scale-default: 1;
+  --slider-fade-start: 220ms;
+  --slider-fade-gap: 160ms;
+  --slider-fade-duration: 520ms;
+  --slider-fade-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
 .slider-container .embla {
@@ -574,12 +601,14 @@ button svg path {
   margin: 0;
   justify-content: center;
   touch-action: pan-y;
+  will-change: transform, opacity;
 }
 
 .slider-container .embla__slide {
   flex: 0 0 var(--slider-card-width);
   min-width: var(--slider-card-width);
   padding-left: 0;
+  will-change: transform, opacity;
 }
 
 .slider-container a {
@@ -603,6 +632,83 @@ button svg path {
   transform-origin: center;
   transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
   will-change: transform, box-shadow, border-color;
+}
+
+.slider-container.slider--fx {
+  opacity: 0;
+  transform: translate3d(0, 12px, 0);
+  will-change: transform, opacity;
+}
+
+.slider-container.slider--fx .embla__slide {
+  opacity: 0;
+  transform: translate3d(0, 20px, 0);
+}
+
+.slider-container.slider--animated {
+  animation: sliderRootFade var(--slider-fade-duration) var(--slider-fade-ease) forwards;
+  animation-delay: var(--slider-fade-start);
+}
+
+.slider-container.slider--animated .embla__slide {
+  animation: sliderFadeUp var(--slider-fade-duration) var(--slider-fade-ease) forwards;
+  animation-delay: calc(var(--slider-fade-start) + var(--slider-fade-gap) * var(--slide-index, 0));
+}
+
+@keyframes overviewFade {
+  0% {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translate3d(0, 28px, 0);
+  }
+
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes sliderRootFade {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 12px, 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes sliderFadeUp {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slider-container.slider--fx,
+  .slider-container.slider--fx .embla__slide,
+  .slider-container.slider--animated,
+  .slider-container.slider--animated .embla__slide,
+  .overview.overview--fx h1,
+  .overview.overview--fx h2,
+  .overview.overview--fx .text,
+  .overview.overview--animated h1,
+  .overview.overview--animated h2,
+  .overview.overview--animated .text {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
 }
 
 .slider .cover {

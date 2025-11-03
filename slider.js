@@ -1,4 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
+  const overview = document.querySelector('.overview');
+  if (overview) {
+    const overviewParts = Array.from(overview.querySelectorAll('h1, h2, .text'));
+    if (overviewParts.length) {
+      overviewParts.forEach((node, index) => node.style.setProperty('--child-index', String(index)));
+      const prefersReduced = typeof window.matchMedia === 'function'
+        && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!prefersReduced && !overview.classList.contains('overview--fx')) {
+        overview.classList.add('overview--fx');
+        const launchOverview = () => overview.classList.add('overview--animated');
+        if (typeof requestAnimationFrame === 'function') {
+          requestAnimationFrame(() => requestAnimationFrame(launchOverview));
+        } else {
+          setTimeout(launchOverview, 60);
+        }
+      }
+    }
+  }
+
   const viewport = document.querySelector('.sliders.embla__viewport');
   const container = viewport?.querySelector('.embla__container');
   if (!viewport || !container || typeof EmblaCarousel !== 'function') return;
@@ -6,11 +25,26 @@ document.addEventListener('DOMContentLoaded', () => {
   const slides = Array.from(container.children);
   if (!slides.length) return;
 
+  const sliderRoot = viewport.closest('.slider-container');
+  const scaleRoot = sliderRoot || document.body;
+
   // Make each direct child of the container an Embla slide
-  slides.forEach((child) => child.classList.add('embla__slide'));
+  slides.forEach((child, index) => {
+    child.classList.add('embla__slide');
+    child.style.setProperty('--slide-index', String(index));
+  });
+
+  if (sliderRoot && !sliderRoot.classList.contains('slider--fx')) {
+    sliderRoot.classList.add('slider--fx');
+    const startAnimation = () => sliderRoot.classList.add('slider--animated');
+    if (typeof requestAnimationFrame === 'function') {
+      requestAnimationFrame(() => requestAnimationFrame(startAnimation));
+    } else {
+      setTimeout(startAnimation, 50);
+    }
+  }
 
   const cards = slides.map((slide) => slide.querySelector('.slider'));
-  const sliderRoot = viewport.closest('.slider-container') || document.body;
 
   let baseScale = 1;
   let minScale = 1;
@@ -20,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const computeScales = () => {
     const viewportWidth = window.innerWidth || document.documentElement.clientWidth || 0;
     const enableScaling = viewportWidth <= 768;
-    const rootStyle = sliderRoot ? getComputedStyle(sliderRoot) : null;
+    const rootStyle = scaleRoot ? getComputedStyle(scaleRoot) : null;
     const declared = rootStyle ? parseFloat(rootStyle.getPropertyValue('--slider-scale-default')) : NaN;
     if (enableScaling) {
       const fallback = 0.9;
@@ -90,6 +124,9 @@ document.addEventListener('DOMContentLoaded', () => {
   embla.on('select', applySlideState);
   embla.on('reInit', () => {
     computeScales();
+    slides.forEach((slide, index) => {
+      slide.style.setProperty('--slide-index', String(index));
+    });
     embla.scrollTo(embla.selectedScrollSnap(), true);
     applySlideState();
   });
