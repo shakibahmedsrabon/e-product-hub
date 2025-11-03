@@ -189,6 +189,13 @@ button svg path {
   position: relative;
   cursor: text;
   pointer-events: auto;
+  transform: scale(0);
+  transition: all .3s ease;
+  transform-origin: right center;
+}
+
+.chat-thread.visible {
+  transform: scale(1);
 }
 
 .chat-button {
@@ -243,11 +250,11 @@ button svg path {
 
 
 .text-message.show {
-  transform: scale(1) translateX(0); /* combine scale with other transforms if needed */
+  transform: scale(1) translateX(0);
   transform-origin: center left;
   opacity: 1;
   filter: blur(0px);
-  transition: .3s ease;   /* smooth animation */
+  transition: .3s ease;
 }
 
 .message.temp {
@@ -848,8 +855,7 @@ button svg path {
   padding: 1rem 0;
   align-items: center;
   pointer-events: none;
-  transition: .7s ease;
-   transition-delay: .5s;
+  transition: .2s ease;
 }
 
 .chat-activity .input {

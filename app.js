@@ -3,9 +3,156 @@ let sendBtn = document.querySelector(".send");
 let BackBtn = document.querySelector(".back");
 let chatBody = document.querySelector(".chat-body");
 let chatBtn = document.querySelector(".chat-button");
-let chatBtnContainer = document.querySelector(".chat-button-container")
+let chatThread = document.querySelector(".chat-thread");
+let chatBtnContainer = document.querySelector(".chat-button-container");
 let textInput = document.getElementById("prompt");
-let header = document.querySelector(".header")
+let header = document.querySelector(".header");
+
+const SNOOZE_HOURS = 7
+const AUTOSHOW_DELAY_MS = 2000
+const SNOOZE_KEY = "chat_snooze_until"
+const SOUND_PATH = "./sounds/eureka.mp3"
+
+const now = () => Date.now()
+const hoursToMs = h => h * 60 * 60 * 1000
+const getSnoozeUntil = () => Number(localStorage.getItem(SNOOZE_KEY) || 0)
+const isSnoozed = () => now() < getSnoozeUntil()
+const snoozeForHours = h => localStorage.setItem(SNOOZE_KEY, String(now() + hoursToMs(h)))
+
+function hideImmediate(el) {
+  try {
+    el.classList.remove("visible")
+    el.style.display = "none"
+  } catch {}
+}
+
+// Hide instantly if snoozed (before anything else can render it)
+;(function ensureHiddenWhileSnoozed() {
+  if (!isSnoozed()) return
+  const el = document.querySelector(".chat-thread")
+  if (el) {
+    hideImmediate(el)
+    return
+  }
+  const mo = new MutationObserver(list => {
+    for (const m of list) {
+      for (const n of m.addedNodes) {
+        if (n.nodeType !== 1) continue
+        if (n.classList && n.classList.contains("chat-thread")) {
+          hideImmediate(n); mo.disconnect(); return
+        }
+        if (n.querySelector) {
+          const f = n.querySelector(".chat-thread")
+          if (f) { hideImmediate(f); mo.disconnect(); return }
+        }
+      }
+    }
+  })
+  mo.observe(document.documentElement, { childList: true, subtree: true })
+})()
+
+document.addEventListener("DOMContentLoaded", () => {
+  const chatBtn = document.querySelector(".chat-button")
+  const chatThread = document.querySelector(".chat-thread")
+  if (!chatBtn || !chatThread) return
+
+  const greetings = [
+    "Hello, how can I help you?",
+    "Hi there! How can I assist you today?",
+    "Welcome! What can I do for you?",
+    "Hello! Do you have any questions?",
+    "Hi! How may I help you today?",
+    "Greetings! What brings you here?",
+    "Hello! What would you like to know?",
+    "Hi there! Need any assistance?",
+    "Welcome! How can I be of service?",
+    "Hello! Do you need any help?"
+  ]
+  const randomGreeting = () => greetings[Math.floor(Math.random() * greetings.length)]
+  const chatSound = new Audio(SOUND_PATH); chatSound.preload = "auto"
+
+  const isVisible = () => chatThread.classList.contains("visible")
+  function showThread(withGreeting = true, withSound = true) {
+    if (isSnoozed() || isVisible()) return
+    if (chatThread.style.display === "none") chatThread.style.display = ""
+    if (withGreeting) chatThread.textContent = randomGreeting()
+    chatThread.classList.add("visible")
+    if (withSound) { chatSound.currentTime = 0; chatSound.play().catch(() => {}) }
+  }
+  function hideThread() {
+    chatThread.classList.remove("visible")
+  }
+
+  let firstInteractionHandled = false
+  let timer = null
+  function onFirstInteraction() {
+    if (firstInteractionHandled || isSnoozed() || isVisible()) return
+    firstInteractionHandled = true
+    if (timer) clearTimeout(timer)
+    timer = setTimeout(() => { if (!isSnoozed() && !isVisible()) showThread(true, true) }, AUTOSHOW_DELAY_MS)
+  }
+  document.addEventListener("mousemove", onFirstInteraction, { once: true, passive: true })
+  document.addEventListener("touchstart", onFirstInteraction, { once: true, passive: true })
+
+  // Important: clicking the button only snoozes and hides; it does NOT open the chat
+  chatBtn.addEventListener("click", () => {
+    snoozeForHours(SNOOZE_HOURS)
+    hideThread()
+    hideImmediate(chatThread) // ensure it won't flash again in this session
+  })
+})
+
+// Track URL changes
+function checkURL() {
+  trackFirstInteraction();
+}
+
+// Chat sound handling
+const chatSound = new Audio("./sounds/eureka.mp3");
+chatSound.preload = "auto";
+chatSound.load();
+
+function playChatSound(){
+  chatSound.currentTime = 0;
+  chatSound.play();
+}
+
+// Track first interaction
+let hasInteracted = false;
+
+// Handle first interaction
+function handleFirstInteraction() {
+  if (hasInteracted) return;
+  hasInteracted = true;
+  
+  // Mark interaction in localStorage
+  if (!localStorage.getItem('firstInteraction')) {
+    localStorage.setItem('firstInteraction', 'true');
+    
+    // Show chat thread after 2 seconds
+    setTimeout(() => {
+      chatThread.textContent = getRandomGreeting();
+      chatThread.classList.add('visible');
+      
+      // Play sound after a small delay
+      setTimeout(() => {
+        chatSound.currentTime = 0;
+        chatSound.play().catch(e => console.log('Sound play failed:', e));
+      }, 100);
+    }, 2000);
+  }
+  
+  // Clean up event listeners
+  document.removeEventListener('click', handleFirstInteraction);
+  document.removeEventListener('keydown', handleFirstInteraction);
+}
+
+// Set up interaction listeners
+document.addEventListener('click', handleFirstInteraction);
+document.addEventListener('keydown', handleFirstInteraction);
+
+// Initial setup
+chatThread.style.display = 'block';
 
 let chatMemory = [];
 const MEMORY_LIMIT = 4; // keep only the last 4 messages (~2 turns)
@@ -1065,10 +1212,3 @@ function scrollView(container) {
     });
   });
 }
-
-
-
-
-
-
-
