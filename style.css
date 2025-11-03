@@ -638,6 +638,12 @@ button svg path {
   margin: 0.5rem 0;
 }
 
+@media screen and (max-width: 1081px) {
+  .slider-container .embla__container {
+    justify-content: normal !important;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .slider-container {
     margin: 2.5rem 0;
