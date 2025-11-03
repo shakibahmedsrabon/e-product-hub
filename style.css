@@ -146,7 +146,6 @@ header {
   width: 100%;
   z-index: 111;
   display: flex;
-  cursor: pointer;
   position: absolute;
   align-items: center;
   pointer-events: none;
@@ -317,17 +316,22 @@ button svg path {
 .chat-attachment--products .chat-embla {
   position: relative;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
 }
 
 .chat-attachment--products .chat-embla__viewport {
   overflow: hidden;
   padding: 0.2rem 1.5rem;
+  margin: 0 auto;
 }
 
 .chat-attachment--products .chat-embla__container {
   display: flex;
   gap: 1.25rem;
   flex-wrap: nowrap;
+  justify-content: center;
 }
 
 .chat-attachment--products .chat-embla__viewport--fallback {
@@ -373,6 +377,11 @@ button svg path {
 .chat-card.up {
   transform: translateY(14px);
   opacity: 0;
+}
+
+.chat-attachment--products .chat-card.is-active {
+  border-color: var(--primary, #5765f2);
+  box-shadow: 0 12px 24px rgba(87, 101, 242, 0.18);
 }
 
 .chat-card__title {
@@ -548,28 +557,37 @@ button svg path {
 .slider-container {
   width: 100%;
   margin: 3rem 0;
+  --slider-card-width: 300px;
+  --slider-gap: 1rem;
+  --slider-scale-default: 1;
 }
 
 .slider-container .embla {
   position: relative;
-  --slide-spacing: 1.1rem;
-  --slide-size: 280px;
+  --slide-size: var(--slider-card-width);
+  --slide-spacing: var(--slider-gap);
+  margin: 0 auto;
 }
 
 .slider-container .embla__viewport {
   overflow: hidden;
-  padding: 0 calc(var(--slide-spacing) * 2);
+  padding: 0 var(--slider-gap);
+  margin: 0 auto;
+  width: 100%;
+  max-width: fit-content;
+  overflow: hidden;
 }
 
 .slider-container .embla__container {
   display: flex;
-  gap: var(--slide-spacing);
-  margin-left: 0;
+  gap: var(--slider-gap);
+  margin: 0;
+  touch-action: pan-y;
 }
 
 .slider-container .embla__slide {
-  flex: 0 0 var(--slide-size);
-  min-width: var(--slide-size);
+  flex: 0 0 var(--slider-card-width);
+  min-width: var(--slider-card-width);
   padding-left: 0;
 }
 
@@ -583,11 +601,17 @@ button svg path {
 
 .slider-container .slider {
   width: 100%;
-  max-width: var(--slide-size);
+  max-width: var(--slider-card-width);
   padding: 0.2rem;
   min-height: 300px;
   border-radius: 24px;
+  overflow: hidden !important;
   border: solid 1px var(--line);
+  --slide-scale: var(--slider-scale-default, 1);
+  transform: scale(var(--slide-scale));
+  transform-origin: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  will-change: transform, box-shadow, border-color;
 }
 
 .slider .cover {
@@ -623,18 +647,10 @@ button svg path {
   margin: 0.5rem 0;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 768px) {
   .slider-container {
     margin: 2.5rem 0;
-  }
-
-  .slider-container .embla {
-    --slide-size: 240px;
-    --slide-spacing: 0.9rem;
-  }
-
-  .slider-container .embla__viewport {
-    padding: 0 calc(var(--slide-spacing) * 2);
+    --slider-scale-default: 0.9;
   }
 
   .slider-container .slider {
@@ -645,20 +661,20 @@ button svg path {
 @media screen and (max-width: 640px) {
   .slider-container {
     margin: 2rem 0;
-  }
-
-  .slider-container .embla {
-    --slide-size: 210px;
-    --slide-spacing: 0.75rem;
-  }
-
-  .slider-container .embla__viewport {
-    padding: 0 calc(var(--slide-spacing) * 1.5);
+    --slider-scale-default: 0.86;
   }
 
   .slider-container .slider {
     min-height: 260px;
     padding: 0.3rem;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .slider-container {
+    --slider-card-width: min(280px, calc(100vw - 2.5rem));
+    --slider-gap: 0.75rem;
+    --slider-scale-default: 0.84;
   }
 }
 
@@ -687,10 +703,10 @@ button svg path {
 
 .embla__viewport {
   overflow: hidden;
+  touch-action: pan-y pinch-zoom;
 }
 .embla__container {
   display: flex;
-  touch-action: pan-y pinch-zoom;
   margin-left: calc(var(--slide-spacing) * -1);
 }
 .embla__slide {
@@ -746,6 +762,10 @@ button svg path {
   .header.close {
     opacity: 0;
     transform: translateY(-10rem);
+  }
+
+  .slider-container .embla__container {
+    gap: 0 !important;
   }
 
   .embla__container {
