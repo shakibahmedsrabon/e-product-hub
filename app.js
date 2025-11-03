@@ -565,7 +565,9 @@ async function Chat(prompt, memory = []) {
     }
 
     const data = await response.json();
+    console.log("Data Log: ", data)
     return data.message;
+
     
   } catch (err) {
     console.error('Chat API Error:', err);
@@ -1012,6 +1014,8 @@ async function handleSend(text) {
     // Call our API endpoint
     const response = await Chat(text, chatMemory);
     const { message: visibleText, payload } = extractJsonBlock(response || "");
+
+    console.log(extractJsonBlock(response || ""))
 
     // Show the response text
     reply[0].textContent = '';
