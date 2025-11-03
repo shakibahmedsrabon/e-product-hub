@@ -503,7 +503,6 @@ async function Chat(prompt, memory = []) {
     }
 
     const data = await response.json();
-    console.log("Data Log: ", data);
     return data;
 
     
@@ -955,8 +954,6 @@ async function handleSend(text) {
     const { message: parsedMessage, payload: inlinePayload } = extractJsonBlock(rawMessage);
     const visibleText = (parsedMessage || rawMessage || "...").trim() || "...";
     const payload = response?.payload ?? inlinePayload ?? null;
-
-    console.log("Assistant response:", { message: visibleText, payload });
 
     // Show the response text
     reply[0].textContent = '';
