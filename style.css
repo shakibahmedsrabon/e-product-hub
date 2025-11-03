@@ -379,11 +379,6 @@ button svg path {
   opacity: 0;
 }
 
-.chat-attachment--products .chat-card.is-active {
-  border-color: var(--primary, #5765f2);
-  box-shadow: 0 12px 24px rgba(87, 101, 242, 0.18);
-}
-
 .chat-card__title {
   font-size: 1rem;
   font-weight: 600;

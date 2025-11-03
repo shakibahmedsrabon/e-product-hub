@@ -809,42 +809,20 @@ function renderProductCards(ids = []) {
     cards.push(card);
   });
 
-  const centerIndex = cards.length ? Math.floor(cards.length / 2) : 0;
-  const setActiveCard = (targetIndex = 0) => {
-    const clamped = Math.min(Math.max(targetIndex, 0), cards.length - 1);
-    cards.forEach((card, index) => {
-      card.classList.toggle("is-active", index === clamped);
-    });
-  };
-  setActiveCard(centerIndex);
-
   cards.forEach((card, index) => {
     setTimeout(() => card.classList.remove("up"), 120 * index + 100);
   });
 
   if (typeof EmblaCarousel === "function") {
     try {
-      const embla = EmblaCarousel(viewport, {
-        align: "center",
+      EmblaCarousel(viewport, {
+        align: "start",
         containScroll: "trimSnaps",
         dragFree: false,
         inViewThreshold: 0.7,
         slidesToScroll: 1,
-        loop: false,
-        startIndex: centerIndex
+        loop: false
       });
-      const syncActive = () => {
-        if (!cards.length) return;
-        const selected = typeof embla.selectedScrollSnap === "function"
-          ? embla.selectedScrollSnap()
-          : centerIndex;
-        setActiveCard(selected);
-      };
-      if (typeof embla.on === "function") {
-        embla.on("select", syncActive);
-        embla.on("reInit", syncActive);
-      }
-      syncActive();
     } catch (err) {
       console.warn("Embla init failed:", err);
       viewport.classList.add("chat-embla__viewport--fallback");

@@ -43,10 +43,6 @@ PURCHASE HANDOFF
 - Follow that sentence with JSON action "show_contacts" and IDs ["wa", "ph"], unless the user already chose one.
 - If they clearly pick phone, send JSON action "click" with just the phone ID.
 
-ACTION:
-- If anyone want human support or want to buy something then return direct phone call
-- If any one want to select some product and love or like that then want to buy then return wa
-
 CONTEXT
 - You will receive a JSON document:
   {
