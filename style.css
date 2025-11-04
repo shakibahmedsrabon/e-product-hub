@@ -1037,6 +1037,9 @@ button svg path {
     padding-left: 1rem;
     font-family: 'Afacad';
     color: var(--black);
+    resize: none;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .chat-activity input::placeholder,
