@@ -204,15 +204,17 @@
                 />
               </svg>
             </section>
-            <input
+              <textarea
               id="prompt"
               type="text"
+              name="prompt"
               placeholder="Do you need anything?"
               autocomplete="off"    
               autocorrect="off" 
               autocapitalize="none"
-              name="prompt"          
-              ></input>
+               style="resize: none;"
+              onkeydown="if(event.key==='Enter'){event.preventDefault();}"     
+              ></textarea>
           </section>
 
           <button class="send">
