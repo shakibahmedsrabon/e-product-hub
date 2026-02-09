@@ -1,0 +1,4 @@
+.target-cursor-wrapper{display:none !important;opacity:0 !important;pointer-events:none !important}
+.target-cursor-dot,.target-cursor-corner{display:none !important}
+.electric-border .eb-glow-1,.electric-border .eb-glow-2,.electric-border .eb-background-glow{display:none !important;opacity:0 !important;filter:none !important}
+.electric-border .eb-stroke{border-color:#1a0097 !important}
