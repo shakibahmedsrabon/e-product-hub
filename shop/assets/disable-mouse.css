@@ -1,4 +1,20 @@
-.target-cursor-wrapper{display:none !important;opacity:0 !important;pointer-events:none !important}
-.target-cursor-dot,.target-cursor-corner{display:none !important}
-.electric-border .eb-glow-1,.electric-border .eb-glow-2,.electric-border .eb-background-glow{display:none !important;opacity:0 !important;filter:none !important}
-.electric-border .eb-stroke{border-color:#1a0097 !important}
+.target-cursor-wrapper,.target-cursor-dot,.target-cursor-corner{display:none !important;opacity:0 !important;pointer-events:none !important}
+
+/* Ensure native cursor remains visible (override JS hiding) */
+html,body,button,a,input,textarea{cursor:auto !important}
+
+/* Replace expensive electric-border visuals with a simple, performant border */
+.electric-border{border:1px solid #1a0097 !important;box-shadow:none !important;background:inherit !important;border-radius:inherit !important;overflow:visible !important}
+.electric-border .eb-stroke{border:1px solid #1a0097 !important}
+.eb-svg,.eb-layers,.eb-glow-1,.eb-glow-2,.eb-background-glow,.eb-overlay-1,.eb-overlay-2{display:none !important;visibility:hidden !important}
+
+/* Simplify and optimize card styles for smoother rendering */
+.review-card,.card,.product-card{transition:transform .12s cubic-bezier(.4,0,.2,1),box-shadow .12s cubic-bezier(.4,0,.2,1);box-shadow:0 6px 18px rgba(0,0,0,0.08) !important;border:1px solid rgba(26,0,151,0.08) !important;background:transparent !important}
+.review-card:hover,.card:hover,.product-card:hover{transform:translateY(-4px);box-shadow:0 10px 24px rgba(0,0,0,0.10) !important}
+
+/* Remove heavy CSS filters globally to improve performance */
+*{filter:none !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important}
+
+/* Keep keyboard focus visible for accessibility (SEO/usability) */
+:focus{outline:2px solid #1a0097 !important;outline-offset:2px}
+
