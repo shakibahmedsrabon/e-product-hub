@@ -1,3 +1,11 @@
+let sliderContainer = document.querySelector('.slider-container');
+
+sliderContainer.style.setProperty('display', 'none');
+
+setTimeout(() => {
+  sliderContainer.style.setProperty('display', 'block');
+});
+
 document.addEventListener('DOMContentLoaded', () => {
   const overview = document.querySelector('.overview');
   if (overview) {
