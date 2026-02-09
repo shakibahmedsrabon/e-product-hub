@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-window.location.replace("https://eproducthubbd.com/shop");
 
   const viewport = document.querySelector('.sliders.embla__viewport');
   const container = viewport?.querySelector('.embla__container');
