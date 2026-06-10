@@ -1,0 +1,1 @@
+ALTER TABLE public."Products" ALTER COLUMN price TYPE jsonb USING to_jsonb(price);
